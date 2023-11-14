@@ -1,17 +1,17 @@
 package com.example.mycalculator.domain.helpers
 
-enum class ArithmeticOperationsEnum(var string: String) : Buttons,ButtonsWithString{
-    Divide("/"),
-    Dote("."),
-    Minus("-"),
-    Multiplication("*"),
-    Percentages("%"),
-    Plus("+");
+enum class ArithmeticOperationsEnum(var string: Char) : Buttons,ButtonsWithString{
+    Divide('/'),
+    Dote('.'),
+    Minus('-'),
+    Multiplication('*'),
+    Percentages('%'),
+    Plus('+');
 
-    override fun codeString() : String{
+    override fun codeString() : Char{
         return this.string
     }
-    override fun code() : Unit{
+    override fun code(){
         return
     }
 }

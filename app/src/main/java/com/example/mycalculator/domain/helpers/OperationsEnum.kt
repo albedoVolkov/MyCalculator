@@ -2,12 +2,12 @@ package com.example.mycalculator.domain.helpers
 
 enum class OperationsEnum : Buttons {
 
-    CloseHistory(),
-    Remove(),
-    Equality(),
-    DeleteAll();
+    CloseHistory,
+    RemoveLast,
+    Equality,
+    DeleteAll;
 
-    override fun code() : Unit{
+    override fun code(){
         return
     }
 }

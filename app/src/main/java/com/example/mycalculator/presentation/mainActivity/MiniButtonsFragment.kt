@@ -1,4 +1,4 @@
-package com.example.mycalculator.presentation
+package com.example.mycalculator.presentation.mainActivity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mycalculator.databinding.MiniButtonsFragmentBinding
+import com.example.mycalculator.domain.FromTaskActivityToMainActivity
 import com.example.mycalculator.domain.helpers.ArithmeticOperationsEnum
-import com.example.mycalculator.domain.helpers.Buttons
 import com.example.mycalculator.domain.helpers.NumbersEnum
 import com.example.mycalculator.domain.helpers.OperationsEnum
 
@@ -20,7 +20,7 @@ class MiniButtonsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = MiniButtonsFragmentBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -53,7 +53,7 @@ class MiniButtonsFragment : Fragment() {
         binding.view13.setOnClickListener {
             (activity as FromTaskActivityToMainActivity)
                 .communicate(
-                    OperationsEnum.Remove
+                    OperationsEnum.RemoveLast
                 )
         }
 

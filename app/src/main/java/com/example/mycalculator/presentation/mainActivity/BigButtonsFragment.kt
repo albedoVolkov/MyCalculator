@@ -1,4 +1,4 @@
-package com.example.mycalculator.presentation
+package com.example.mycalculator.presentation.mainActivity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +16,7 @@ class BigButtonsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = BigButtonsFragmentBinding.inflate(inflater, container, false)
         return binding.root
 
