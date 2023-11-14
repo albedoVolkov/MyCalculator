@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:background="@color/white"
+    tools:context=".presentation.BigButtonsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_mini_buttons_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/container_buttons_activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view1_1"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="27dp"
+                    android:src="@mipmap/close_history" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view1_2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="27dp"
+                    android:src="@mipmap/c_button" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view1_3"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="27dp"
+                    android:src="@mipmap/remove_round" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view1_4"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="13dp"
+                    android:src="@mipmap/divide" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view2_1"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/seven" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view2_2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/eight" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view2_3"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/nine" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view2_4"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="13dp"
+                    android:src="@mipmap/multiplication" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view3_1"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/four" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view3_2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/five" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view3_3"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/six" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view3_4"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="20dp"
+                    android:src="@mipmap/minus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view4_1"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/one" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view4_2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/two" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view4_3"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/three" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view4_4"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="27dp"
+                    android:src="@mipmap/plus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view5_1"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="32dp"
+                    android:src="@mipmap/persentage" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view5_2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="23dp"
+                    android:src="@mipmap/zero" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view5_3"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="40dp"
+                    android:src="@mipmap/dote" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view5_4"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:padding="20dp"
+                    android:src="@mipmap/equality" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
