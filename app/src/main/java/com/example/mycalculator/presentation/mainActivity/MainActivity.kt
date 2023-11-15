@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
 
     private fun setObservers() {
         binding.textViewResultMainActivity.text = "0"
-        binding.textView1MainActivity.text = "0,0"
+        binding.textView1MainActivity.text = "0.0"
 
         viewModel.mainText.observe(this) {
             viewModel.filterItems("None")//usual
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             mainText = list.toString()
             binding.textViewResultMainActivity.text = mainText
 
-            resultText = showResult(list)
+            resultText = showResult(list.toString())
             binding.textView1MainActivity.text = resultText
 
             Log.d(TAG, "string = $mainText")
@@ -140,22 +140,27 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             val result = Expression(expression).calculate()
             if (result.isNaN()) {
                 // Show Error Message
-                "0,0"
+                "0.0"
             } else {
                 // Show Result
                 DecimalFormat("0.######").format(result).toString()
             }
         } catch (e: Exception) {
             // Show Error Message
+            Log.d(TAG, "string = Error")
             "Error"
         }
-        return mainResult ?: "0,0"
+        return getOutputExpression(mainResult)
     }
 
     private fun getInputExpression(string : String): String {
         var expression = string.replace(Regex("÷"), "/")
         expression = expression.replace(Regex("×"), "*")
         return expression
+    }
+
+    private fun getOutputExpression(string : String): String {
+        return string.replace(Regex(","), ".")
     }
 
 

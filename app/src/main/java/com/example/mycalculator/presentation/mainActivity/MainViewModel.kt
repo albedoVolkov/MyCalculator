@@ -19,17 +19,17 @@ class MainViewModel : ViewModel() {
 
     init {
         _mainText.value = ""
-        _showMainText.value = "0,0"
+        _showMainText.value = "0.0"
     }
 
 
     fun filterItems(filterType: String) {
         Log.d(TAG, "filterType is $filterType and list is ${_mainText.value}")
         _showMainText.value = when (filterType) {
-            "None" -> _mainText.value ?: "0,0"
-            "Zero" -> "0,0"
-            "Reversed" -> _mainText.value?.reversed() ?: "0,0"
-            else -> { "0,0" }
+            "None" -> _mainText.value ?: "0.0"
+            "Zero" -> "0.0"
+            "Reversed" -> _mainText.value?.reversed() ?: "0.0"
+            else -> { "0.0" }
         }
     }
 
