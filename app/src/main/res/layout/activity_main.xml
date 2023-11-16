@@ -50,12 +50,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginHorizontal="30dp"
-                android:gravity="right|center_vertical"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeStepGranularity="2sp"
+                android:gravity="right"
+                android:text="2243432423324324323243244322434324432432"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView_1_main_activity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView_1_main_activity"
@@ -63,6 +69,10 @@
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="30dp"
                 android:gravity="right|center_vertical"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeStepGranularity="2sp"
                 android:text="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

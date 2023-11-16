@@ -22,6 +22,7 @@ import com.example.mycalculator.domain.helpers.operationsEnum.NumbersEnum
 import com.example.mycalculator.domain.helpers.operationsEnum.OperationsEnum
 import com.example.mycalculator.presentation.mainActivity.fragments.MiniButtonsFragment
 import org.mariuszgromada.math.mxparser.Expression
+import java.math.BigDecimal
 import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
     private val actionsAdapter get() =  _actionsAdapter!!
 
 
-    private var resultText = ""
+    private var resultText : BigDecimal = BigDecimal(0)
     private var mainText = ""
 
     companion object {
@@ -86,8 +87,10 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             mainText = list.toString()
             binding.textViewResultMainActivity.text = mainText
 
-            resultText = showResult(list.toString())
-            binding.textView1MainActivity.text = resultText
+            val resultInner = showResult(list.toString())
+            Log.d(TAG, "resultInner = $resultInner")
+            resultText = BigDecimal(resultInner)
+            binding.textView1MainActivity.text = resultText.toEngineeringString()
 
             Log.d(TAG, "string = $mainText")
             Log.d(TAG, "result = $resultText")
@@ -103,7 +106,7 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
         viewModel.actions.observe(this
         ) { list ->
             if (list != null) {
-                actionsAdapter.data = list
+                actionsAdapter.setData(list)
                 actionsAdapter.notifyDataSetChanged()
                 Log.d(TAG, "ActionsAdapter : $list")
             }
@@ -150,7 +153,7 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             OperationsEnum.Equality -> {
                 if(mainText != "0" && mainText != "") {
                     val value = resultText
-                    viewModel.addAction(mainText, resultText)
+                    viewModel.addAction(mainText, resultText.toEngineeringString())
                     viewModel.deleteAll()
                     viewModel.setMainText(value.toString())
                 }
@@ -172,7 +175,7 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
     private fun showResult(string: String) : String{
         var mainResult = ""
         mainResult = try {
-            val result = Expression(string).calculate()
+            val result = Expression(string).calculate().toDouble()
             if (result.isNaN()) {
                 // Show Error Message
                 "0.0"
@@ -190,7 +193,8 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
 
 
     private fun setActionsAdapter(itemList: List<Action>?) {
-        _actionsAdapter = ActionsAdapter(itemList ?: emptyList(), this)
+        _actionsAdapter = ActionsAdapter(this)
+        _actionsAdapter!!.setData(listOf())
         actionsAdapter.onClickListener = object : ActionsAdapter.OnClickListener {
 
             override fun onClick(itemData: Action) {
