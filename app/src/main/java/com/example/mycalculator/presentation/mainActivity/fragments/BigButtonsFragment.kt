@@ -1,4 +1,4 @@
-package com.example.mycalculator.presentation.mainActivity
+package com.example.mycalculator.presentation.mainActivity.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

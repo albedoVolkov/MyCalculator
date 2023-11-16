@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="500dp"
     android:background="@color/white"
-    tools:context=".presentation.mainActivity.BigButtonsFragment">
+    tools:context=".presentation.mainActivity.fragments.BigButtonsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_mini_buttons_fragment"

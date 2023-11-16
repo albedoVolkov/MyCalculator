@@ -4,8 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mycalculator.domain.ActionsRepository
+import com.example.mycalculator.domain.IdRepository
+import com.example.mycalculator.domain.helpers.models.Action
+import com.example.mycalculator.domain.usecases.ActionsRepository.AddActionToListUseCase
+import com.example.mycalculator.domain.usecases.ActionsRepository.DeleteAllItemsFromListUseCase
+import com.example.mycalculator.domain.usecases.ActionsRepository.GetActionFromListByIdUseCase
+import com.example.mycalculator.domain.usecases.ActionsRepository.GetListOfActionsUseCase
+import com.example.mycalculator.domain.usecases.IdRepository.CreateIdForActionItem
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val idRepository: IdRepository,private val  actionsRepository: ActionsRepository) : ViewModel() {
 
     companion object {
         const val TAG = "MainViewModel"
@@ -17,9 +27,14 @@ class MainViewModel : ViewModel() {
     private var _showMainText : MutableLiveData<String> = MutableLiveData<String>()
     val showMainText: LiveData<String> get() = _showMainText
 
+    private var _actions : MutableLiveData<List<Action>> = MutableLiveData<List<Action>>()
+    val actions: LiveData<List<Action>> get() = _actions
+
     init {
         _mainText.value = ""
         _showMainText.value = "0.0"
+
+        getActions()
     }
 
 
@@ -56,6 +71,26 @@ class MainViewModel : ViewModel() {
             }
         }else{
             _mainText.value = ""
+        }
+    }
+
+    private fun getActions(){
+        viewModelScope.launch {
+            _actions = GetListOfActionsUseCase(actionsRepository).execute() as MutableLiveData<List<Action>>
+        }
+    }
+
+    fun addAction(mainAction : String, result : String){
+        viewModelScope.launch {
+            val id = CreateIdForActionItem(idRepository).execute()
+            val action = Action(id, mainAction, result)
+            AddActionToListUseCase(actionsRepository).execute(action)
+        }
+    }
+
+    fun deleteHistory(){
+        viewModelScope.launch {
+            DeleteAllItemsFromListUseCase(actionsRepository).execute()
         }
     }
 

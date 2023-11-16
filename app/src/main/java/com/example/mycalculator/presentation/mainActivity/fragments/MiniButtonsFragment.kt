@@ -1,4 +1,4 @@
-package com.example.mycalculator.presentation.mainActivity
+package com.example.mycalculator.presentation.mainActivity.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mycalculator.databinding.MiniButtonsFragmentBinding
 import com.example.mycalculator.domain.FromTaskActivityToMainActivity
-import com.example.mycalculator.domain.helpers.ArithmeticOperationsEnum
-import com.example.mycalculator.domain.helpers.NumbersEnum
-import com.example.mycalculator.domain.helpers.OperationsEnum
+import com.example.mycalculator.domain.helpers.operationsEnum.ArithmeticOperationsEnum
+import com.example.mycalculator.domain.helpers.operationsEnum.NumbersEnum
+import com.example.mycalculator.domain.helpers.operationsEnum.OperationsEnum
 
 
 class MiniButtonsFragment : Fragment() {

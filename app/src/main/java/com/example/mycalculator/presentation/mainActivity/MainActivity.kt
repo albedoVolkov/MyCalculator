@@ -2,19 +2,25 @@ package com.example.mycalculator.presentation.mainActivity
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mycalculator.R
+import com.example.mycalculator.data.ActionsRepositoryImpl
 import com.example.mycalculator.databinding.ActivityMainBinding
+import com.example.mycalculator.domain.ActionsRepository
 import com.example.mycalculator.domain.FromTaskActivityToMainActivity
-import com.example.mycalculator.domain.helpers.ArithmeticOperationsEnum
-import com.example.mycalculator.domain.helpers.Buttons
-import com.example.mycalculator.domain.helpers.ButtonsWithString
-import com.example.mycalculator.domain.helpers.NumbersEnum
-import com.example.mycalculator.domain.helpers.OperationsEnum
+import com.example.mycalculator.domain.IdRepository
+import com.example.mycalculator.domain.helpers.models.Action
+import com.example.mycalculator.domain.helpers.operationsEnum.ArithmeticOperationsEnum
+import com.example.mycalculator.domain.helpers.operationsEnum.basedClasses.Buttons
+import com.example.mycalculator.domain.helpers.operationsEnum.basedClasses.ButtonsWithString
+import com.example.mycalculator.domain.helpers.operationsEnum.NumbersEnum
+import com.example.mycalculator.domain.helpers.operationsEnum.OperationsEnum
+import com.example.mycalculator.presentation.mainActivity.fragments.MiniButtonsFragment
 import org.mariuszgromada.math.mxparser.Expression
 import java.text.DecimalFormat
 
@@ -22,8 +28,14 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
 
     private var _binding : ActivityMainBinding? = null
     private val binding get() = _binding!!
+
     private var _viewModel : MainViewModel? = null
     private val viewModel get() = _viewModel!!
+    private var _viewModelFactory: MainViewModelFactory? = null
+
+    private var _actionsAdapter: ActionsAdapter? = null
+    private val actionsAdapter get() =  _actionsAdapter!!
+
 
     private var resultText = ""
     private var mainText = ""
@@ -37,7 +49,9 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
         super.onCreate(savedInstanceState)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        _viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        _viewModelFactory = MainViewModelFactory(IdRepository(), ActionsRepositoryImpl())
+        _viewModel = ViewModelProvider(this, _viewModelFactory!!)[MainViewModel::class.java]
 
         setContentView(binding.root)
 
@@ -48,6 +62,16 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
 
 
     private fun setObservers() {
+
+        setActionsAdapter(viewModel.actions.value)
+
+        binding.recyclerView2MainActivity.apply {
+            val gridLayoutManager =
+                GridLayoutManager(applicationContext, 1, LinearLayoutManager.VERTICAL, true)
+            layoutManager = gridLayoutManager
+            adapter = actionsAdapter
+        }
+
         binding.textViewResultMainActivity.text = "0"
         binding.textView1MainActivity.text = "0.0"
 
@@ -69,9 +93,19 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             Log.d(TAG, "result = $resultText")
         }
 
+
         viewModel.showMainText.observe(this) {list ->
             if(list == "") {
                 binding.textViewResultMainActivity.text = "0"
+            }
+        }
+
+        viewModel.actions.observe(this
+        ) { list ->
+            if (list != null) {
+                actionsAdapter.data = list
+                actionsAdapter.notifyDataSetChanged()
+                Log.d(TAG, "ActionsAdapter : $list")
             }
         }
     }
@@ -85,7 +119,6 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             TODO()
         }
     }
-
 
 
 
@@ -106,16 +139,21 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
         }
     }
 
+
+
     private fun operationsUI(operation : OperationsEnum){
         when(operation){
             OperationsEnum.CloseHistory -> {
-                Toast.makeText(this,"Close History",Toast.LENGTH_SHORT).show()
+                viewModel.deleteHistory()
             }
 
             OperationsEnum.Equality -> {
-                val value = resultText
-                viewModel.deleteAll()
-                viewModel.setMainText(value)
+                if(mainText != "0" && mainText != "") {
+                    val value = resultText
+                    viewModel.addAction(mainText, resultText)
+                    viewModel.deleteAll()
+                    viewModel.setMainText(value.toString())
+                }
             }
 
             OperationsEnum.RemoveLast -> {
@@ -131,13 +169,10 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
 
 
 
-
-
     private fun showResult(string: String) : String{
         var mainResult = ""
         mainResult = try {
-            val expression = getInputExpression(string)
-            val result = Expression(expression).calculate()
+            val result = Expression(string).calculate()
             if (result.isNaN()) {
                 // Show Error Message
                 "0.0"
@@ -150,17 +185,18 @@ class MainActivity : AppCompatActivity(), FromTaskActivityToMainActivity {
             Log.d(TAG, "string = Error")
             "Error"
         }
-        return getOutputExpression(mainResult)
+        return mainResult.replace(Regex(","), ".")
     }
 
-    private fun getInputExpression(string : String): String {
-        var expression = string.replace(Regex("÷"), "/")
-        expression = expression.replace(Regex("×"), "*")
-        return expression
-    }
 
-    private fun getOutputExpression(string : String): String {
-        return string.replace(Regex(","), ".")
+    private fun setActionsAdapter(itemList: List<Action>?) {
+        _actionsAdapter = ActionsAdapter(itemList ?: emptyList(), this)
+        actionsAdapter.onClickListener = object : ActionsAdapter.OnClickListener {
+
+            override fun onClick(itemData: Action) {
+                null
+            }
+        }
     }
 
 

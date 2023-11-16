@@ -1,4 +1,6 @@
-package com.example.mycalculator.domain.helpers
+package com.example.mycalculator.domain.helpers.operationsEnum
+
+import com.example.mycalculator.domain.helpers.operationsEnum.basedClasses.Buttons
 
 enum class OperationsEnum : Buttons {
 

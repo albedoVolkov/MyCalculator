@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.mycalculator.presentation.mainActivity.BigButtonsFragment"
+        android:name="com.example.mycalculator.presentation.mainActivity.fragments.BigButtonsFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/mini_buttons_fragment">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.mycalculator.presentation.mainActivity.MiniButtonsFragment"
+        android:name="com.example.mycalculator.presentation.mainActivity.fragments.MiniButtonsFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/big_buttons_fragment">
 
